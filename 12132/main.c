@@ -14,17 +14,17 @@ int main(void)
     for (int i = 0; i < n + 1; i++) {
         array[i] = 1;
     }
-    int MAX = 0;
+    int MAX = 0; // record the max seen position
     for (int i = 0; i < n; i++) {
         int count = 0;
-        if (array[b[i]] == 0) {
+        if (array[b[i]] == 0) { // already seen
             output[i] = count;
         } else {
             for (int j = MAX; j < n; j++) {
-                    array[a[j]] = 0;
+                    array[a[j]] = 0; // seen
                     count++;
                 if (b[i] == a[j]) {
-                    MAX = j + 1;
+                    MAX = j + 1; // start from the next position
                     output[i] = count;
                     break;
                 }
