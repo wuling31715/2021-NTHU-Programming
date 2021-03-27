@@ -4,48 +4,40 @@ int main(void)
 {
     int n;
     scanf("%d\n", &n);
-    int a[n], b[n];
-    for (int i = 0; i < n; i++)
-    {
+    int a[n], b[n], array[n + 1], output[n];
+    for (int i = 0; i < n; i++) {
         scanf("%d", &a[i]);
     }
-    for (int i = 0; i < n; i++)
-    {
+    for (int i = 0; i < n; i++) {
         scanf("%d", &b[i]);
     }
-    int dict[n];
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 0; j < n; j++)
-        {
-            if (b[i] == a[j])
-            {
-                dict[i] = j;
-                break;
+    for (int i = 0; i < n + 1; i++) {
+        array[i] = 1;
+    }
+    int MAX = 0;
+    for (int i = 0; i < n; i++) {
+        int count = 0;
+        if (array[b[i]] == 0) {
+            output[i] = count;
+        } else {
+            for (int j = MAX; j < n; j++) {
+                    array[a[j]] = 0;
+                    count++;
+                if (b[i] == a[j]) {
+                    MAX = j + 1;
+                    output[i] = count;
+                    break;
+                }
             }
         }
     }
-    int output[n];
-    int MAX = 0;
-    for (int i = 0; i < n; i++)
-    {
-        if (dict[i] >= MAX)
-        {
-            output[i] = dict[i] + 1 - MAX;
-            MAX = dict[i] + 1;
+    for (int i = 0; i < n; i++) {
+        if (i != n - 1) {
+            printf("%d ", output[i]);
         } else {
-            output[i] = 0;
+            printf("%d", output[i]);
         }
     }
-    for (int i = 0; i < n; i++)
-    {
-        if (i == n - 1)
-        {
-            printf("%d", output[i]);
-        } else {
-            printf("%d ", output[i]);
-        }        
-    } 
     printf("\n");
     return 0;
 }
