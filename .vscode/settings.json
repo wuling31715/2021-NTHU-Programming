@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "string_view": "c",
-        "stdlib.h": "c"
+        "stdlib.h": "c",
+        "array": "c"
     }
 }
