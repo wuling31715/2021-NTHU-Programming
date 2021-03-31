@@ -22,8 +22,12 @@ int main(void) {
         int max = 0;
         long sum = 0;
         scanf("%d %d %d\n", &l, &r, &m);
-        if (l <= max_index && max_index <= r) {
-            sum = prefix_sum[max_index] - prefix_sum[max_index - m];
+        if (l < max_index && max_index < r) {
+            if (l + m - 1 >= max_index) {
+                sum = prefix_sum[max_index] - prefix_sum[l - 1];
+            } else {
+                sum = prefix_sum[l + m - 1] - prefix_sum[l - 1];
+            }      
         } else if (l > max_index) {
             if (array[l] < 0) {
                 sum = 0;
@@ -31,9 +35,9 @@ int main(void) {
                 sum = prefix_sum[l];
             }
         } else if (l >= max_index) {
-            sum = prefix_sum[max_index];
+            sum = prefix_sum[max_index] - prefix_sum[max_index - 1];
         } else if (r < max_index || r <= max_index) {
-            sum = prefix_sum[l + m - 1];
+            sum = prefix_sum[l + m - 1] - prefix_sum[l - 1];
         }        
         printf("%ld\n", sum);
     }
