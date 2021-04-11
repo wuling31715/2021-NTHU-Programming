@@ -24,7 +24,6 @@ int main(void) {
     }
     scanf("%d\n", &t);
     for (int i = 0; i < t; i++) {
-        int count = 0;
         scanf("%d %d\n", &a, &b);
         printf("%d\n", prefix[b] - prefix[a - 1]);
     }
