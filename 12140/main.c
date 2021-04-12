@@ -1,29 +1,39 @@
 #include <stdio.h>
 #include <string.h>
 
-int main(void)
-{
-    int count = 0;
-    int i, j = 0;
-    char str[100], str1[20];
-    printf("Enter the string:\n");
-    scanf(" %[^\n]s", str);
-    printf("Enter the substring to be matched:\n");
-    scanf(" %[^\n]s", str1);
-    int k = strlen(str1);
-    int n = strlen(str);
-    for (i = 0; i < n; i++)
-    {
-        while (str[i] == str[j])
-        {
-            j ++;
+char text[1000];
+char pattern[1000];
+int prefix[1001];
+int count = 0;
+
+void string_matching(int N, int M) {
+    for (int i = 0; i <= N - M; i++) { // slide window
+        int j = 0; // start matching
+        for (j = 0; j < M; j++) {
+            if (text[i + j] != pattern[j]) {
+                break;
+            }
         }
-        if (j == k)
-        {
-            count ++;
-            j = 0;
+        if (j == M) { // pattern matched
+           count++;
+           j = 0;
         }
-    } 
-    printf("%d\n", count);
+        prefix[i + 1] = count; // start from 1
+    }
+    int tmp = N - M + 1;
+    for (int i = tmp; i <= N; i++) {
+        prefix[i] = prefix[tmp];
+    }
+}
+
+int main(void) {
+    scanf(" %[a-z]s", text);
+    scanf(" %[a-z]s", pattern);
+    int N = strlen(text);
+    int M = strlen(pattern);
+    string_matching(N, M);
+    for (int i = 1; i <= N; i++) {
+        printf("%d ", prefix[i]);
+    }
     return 0;
 }

@@ -16,12 +16,12 @@ int countFreq(string &pat, string &txt)
            pattern match */
         int j;
         for (j = 0; j < M; j++)
-            if (txt[i+j] != pat[j])
+            if (txt[i+j] != pat[j]) {
                 break;
+            }
   
         // if pat[0...M-1] = txt[i, i+1, ...i+M-1]
-        if (j == M) 
-        {
+        if (j == M) {
            res++;
            j = 0;
         }
@@ -30,10 +30,9 @@ int countFreq(string &pat, string &txt)
 }
    
 /* Driver program to test above function */
-int main()
-{
-   string txt = "dhimanman";
-   string pat = "man";
+int main(void) {
+   string txt = "hasahasasaki";
+   string pat = "sa";
    cout << countFreq(pat, txt) << endl;
    return 0;
 }
