@@ -1,70 +1,63 @@
 #include <stdio.h>
 #include <string.h>
 
-char text[1000];
-char pattern[1000];
-int prefix[1001];
-int prefix2[1001];
-int count = 0;
+char S[1001], p[1001];
+int s_len, p_len;
 
-void string_matching(int N, int M) {
-    prefix[0] = 0;
-
-    for (int i = 0; i <= N - M; i++) { // slide window
-        int j = 0; // start matching
-        for (j = 0; j < M; j++) {
-            if (text[i + j] != pattern[j]) {
-                break;
-            }
+int check_head(int id) {
+    for(int i = id, j = 0; j < p_len; j++, i++) {
+        if (i >= s_len || S[i] != p[j]) {
+            return 0;
         }
-        if (j == M) { // pattern matched
-            count++;
-            j = 0;
-            prefix2[i + 1] = 1;
-            // prefix2[i + M] = -1;
-        } else { 
-            prefix2[i + M] = 0;
-        }
-        prefix[i + M] = count; // store at the end of matching
     }
+    return 1;
 }
 
-int main(void) {
-    scanf(" %[a-z]s", text);
-    scanf(" %[a-z]s", pattern);
-    int N = strlen(text);
-    int M = strlen(pattern);
-    string_matching(N, M);
-    for (int i = 1; i <= N; i++) {
-        printf("%d  ", i);
-    }
-    printf("\n");
-    for (int i = 0; i <= N; i++) {
-        printf("%c  ", text[i]);
-    }
-    printf("\n");
-    for (int i = 1; i <= N; i++) {
-        printf("%d  ", prefix[i]);
-    }
-    printf("\n");
-    for (int i = 1; i <= N; i++) {
-        printf("%d  ", prefix2[i]);
-    }
-    printf("\n");
-    int t, l, r, frequence;
-    scanf("%d\n", &t);
-    for (int i = 0; i < t; i++) {
-        scanf("%d %d\n", &l, &r);
-        if (r - l + 1 < M) {
-            frequence = 0;
-        } else {
-            frequence = prefix[r] - prefix[l];
+int check_end(int id) {
+    for (int i = id, j = p_len - 1; j >= 0; j--, i--) {
+        if (i < 0 || S[i] != p[j]) {
+            return 0;
         }
-        if (frequence < 0) {
-            frequence = 0;
+    }
+    return 1;
+}
+
+int main (void) {
+    scanf("%s%s", S, p);
+    int prefix_head[1002], prefix_end[1002];
+    prefix_head[0] = 0;
+    prefix_end[0] = 0;
+    s_len = strlen(S);
+    p_len = strlen(p);
+    for (int i = 1; i <= s_len; i++) {
+        printf("%d ", i);
+    }
+    printf("\n");
+    for (int i = 0; i < s_len; i++) {
+        printf("%c ", S[i]);
+    }
+    printf("\n");
+    for (int i = 0; i < s_len; i++) {
+        prefix_head[i + 1] = check_head(i) + prefix_head[i];
+        printf("%d ", prefix_head[i + 1]);
+    }
+    printf("\n");
+    for (int i = 0; i < s_len; i++) {
+        prefix_end[i + 1] = check_end(i) + prefix_end[i];
+        printf("%d ", prefix_end[i + 1]);
+    }
+    printf("\n");
+    int q;
+    scanf("%d", &q);
+    while(q--)
+    {
+        int l, r, ans;
+        scanf("%d%d\n", &l, &r);
+        ans = prefix_end[r] - prefix_head[l - 1];
+        if (ans < 0) {
+            ans = 0;
         }
-        printf("%d %d %d\n", l, r, frequence);
-        // printf("%d\n", frequence);
+        printf("%d %d %d\n", l, r, ans);
     }
     return 0;
 }
