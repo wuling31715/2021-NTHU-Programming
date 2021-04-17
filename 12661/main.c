@@ -1,5 +1,7 @@
 #include <stdio.h>
+
 int tmp[10000]= {0};
+
 int main()
 {
     int t, n, m, k;
