@@ -14,12 +14,12 @@ int main()
         if (change != 0 && change % 3 == 0){
             change ++;
         }
-        if ((cap % 3) + (change % 3) % 3 == 0){
+        if ((cap % 3) + (change % 3) == 0){
             change ++;
         }
         ans = cap + change;
         if (ans >= n){
-            printf("%d\n",cap);
+            printf("%d\n", cap);
             break;
         }
     }

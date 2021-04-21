@@ -2,7 +2,10 @@
 
 // 暴力解
 int main(void) {
-    int N, buy = 0, free = 0, cap = 0;
+    int N;
+    int buy = 0;
+    int free = 0;
+    int cap = 0;
     scanf("%d\n", &N);
     while (buy + free != N) {
         buy++;
