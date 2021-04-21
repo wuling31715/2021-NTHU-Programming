@@ -39,3 +39,4 @@ int main(){
     }
 }
 // g++ -std=c++11 main.cpp
+// CodeForces 559B : Equivalent Strings
