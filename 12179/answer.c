@@ -17,7 +17,7 @@ void test(long row, long ld, long rd) {
  
 int main() {
 	int N;
-    scanf("%d", &N);
+	scanf("%d", &N);
 	upperlim = (upperlim << N) - 1;         
 	test(0, 0, 0);
 	printf("%ld\n", sum);
