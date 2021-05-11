@@ -1,8 +1,9 @@
 #ifndef _FUNCTION_H_
 #define _FUNCTION_H_
-// 二元搜索只適用於「已排序」序列
+// 二元搜索只適用於「已排序」序列，時間複雜度為O(logN)
+// eg. 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
 int binarySearch(int arr[], int l, int r, int x) {
-    if (r >= l) { 
+    if (r >= l) { // 右必須大於左，否則終止遞迴
         int mid = l + (r - l) / 2; // 中位數
         if (arr[mid] == x) { // 找到目標
             return mid;
