@@ -1,5 +1,4 @@
 #include <stdio.h>
-int N = 3;   
 
 void printTheArray(int arr[], int n) {
     for (int i = 0; i < n; i++) {
@@ -18,7 +17,28 @@ void generateAllBinaryStrings(int n, int arr[], int i) {
     arr[i] = 1;
     generateAllBinaryStrings(n, arr, i + 1);
 }
- 
+
+int convert(int number, int base){
+    if (number == 0 || base == 10) {
+        return number;
+    }
+    return (number % base) + 10 * convert(number / base, base);
+}
+
+int get_last_digit(int n) {
+    return n % 10;
+}
+
+void combination(int n, int arr[]) {
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j <= n; j++) {
+            int sum = arr[i] * j;
+            printf("%d %d %d", arr[i], j, sum);
+            printf("\n");
+        }
+    }
+}
+
 int main(void) {
     int n, k;
     while(scanf("%d %d", &n, &k) != EOF) {
@@ -28,8 +48,14 @@ int main(void) {
             scanf("%d", &arr[i]);
         }
         for (int i = 0; i < n; i++) {
+            // int x = convert(arr[i], k);
+            // x = get_last_digit(x);
             printf("%d ", arr[i]);
         }
+        combination(n, arr);
+        printf("\n");
+        // int arr[n];
+        // generateAllBinaryStrings(n, arr, 0); 
         printf("\n");
     }
 	return 0;
